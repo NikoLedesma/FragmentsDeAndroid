@@ -16,7 +16,7 @@ import android.widget.Button;
 public class MyListFragment extends Fragment {
 
     private OnItemSelectedListener listener;
-    private static buttonType  BUTTON_TYPE_SELECTED;
+    public static buttonType  BUTTON_TYPE_SELECTED =buttonType.Updater;
     public enum buttonType { Updater , DisplayerBeach }
 
     public interface  OnItemSelectedListener {

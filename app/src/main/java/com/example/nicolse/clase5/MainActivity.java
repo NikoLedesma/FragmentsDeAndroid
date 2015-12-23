@@ -26,7 +26,14 @@ public class MainActivity extends FragmentActivity implements  MyListFragment.On
         boolean dual_pane=getResources().getBoolean(R.bool.dual_pane);
         if(dual_pane){
             DetailFragment fragment = (DetailFragment) getSupportFragmentManager().findFragmentById(R.id.detailFragment);
-            fragment.setText(link);
+            if(MyListFragment.BUTTON_TYPE_SELECTED== MyListFragment.buttonType.Updater){
+                fragment.setText(link);
+            }
+
+            if(MyListFragment.BUTTON_TYPE_SELECTED== MyListFragment.buttonType.DisplayerBeach){
+                fragment.setImage(R.drawable.beach);
+            }
+
         }else{
             Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
             intent.putExtra(DetailActivity.EXTRA_URL,link);
