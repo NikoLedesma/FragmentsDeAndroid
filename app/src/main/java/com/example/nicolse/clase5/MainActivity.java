@@ -1,5 +1,6 @@
 package com.example.nicolse.clase5;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,7 +21,20 @@ public class MainActivity extends FragmentActivity implements  MyListFragment.On
 
     @Override
     public void onRssItemSelected(String link) {
-        DetailFragment fragment = (DetailFragment) getSupportFragmentManager().findFragmentById(R.id.detailFragment);
-        fragment.setText(link);
+
+
+        boolean dual_pane=getResources().getBoolean(R.bool.dual_pane);
+        if(dual_pane){
+            DetailFragment fragment = (DetailFragment) getSupportFragmentManager().findFragmentById(R.id.detailFragment);
+            fragment.setText(link);
+        }else{
+            Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
+            intent.putExtra(DetailActivity.EXTRA_URL,link);
+            startActivity(intent);
+        }
+
+
+
+
     }
 }
