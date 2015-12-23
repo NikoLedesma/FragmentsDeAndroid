@@ -16,7 +16,8 @@ import android.widget.Button;
 public class MyListFragment extends Fragment {
 
     private OnItemSelectedListener listener;
-
+    private static buttonType  BUTTON_TYPE_SELECTED;
+    public enum buttonType { Updater , DisplayerBeach }
 
     public interface  OnItemSelectedListener {
         public void onRssItemSelected(String link);
@@ -25,15 +26,37 @@ public class MyListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_news_list,container,true);
-        Button button =(Button) view.findViewById(R.id.update_button);
-        button.setOnClickListener(new View.OnClickListener() {
+        setOnClickListenerAllButtons(view);
+        return view;
+    }
+
+
+
+    public void setOnClickListenerAllButtons(View view){
+
+        Button buttonUpdater =(Button) view.findViewById(R.id.update_button);
+        buttonUpdater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                BUTTON_TYPE_SELECTED=buttonType.Updater;
                 updateDetail("fake");
             }
         });
-        return view;
+
+
+        Button buttonDiplayerBeach = (Button) view.findViewById(R.id.image_button);
+        buttonDiplayerBeach.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        BUTTON_TYPE_SELECTED = buttonType.DisplayerBeach;
+                        updateDetail("beacher");
+                    }
+                }
+
+        );
     }
+
 
 //EL context del onAttach se podria considerar como el "activity main" lo cual el "activity" seria el listener?
     @Override
@@ -49,14 +72,23 @@ public class MyListFragment extends Fragment {
     }
 
     public void updateDetail(String uri){
-        String newTime = String.valueOf(System.currentTimeMillis());
-        listener.onRssItemSelected(newTime);
+        String newTime=null;
+
+        switch (BUTTON_TYPE_SELECTED){
+            case DisplayerBeach:
+                newTime = String.valueOf(111101111);
+                listener.onRssItemSelected(newTime);
+            break;
+
+            case Updater:
+                newTime = String.valueOf(System.currentTimeMillis());
+                listener.onRssItemSelected(newTime);
+            break;
+
+        }
+
+
     }
-
-
-
-
-
 
 }
 
