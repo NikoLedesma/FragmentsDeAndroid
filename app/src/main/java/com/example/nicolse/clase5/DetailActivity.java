@@ -43,16 +43,22 @@ public class DetailActivity extends FragmentActivity {
 
         setContentView(R.layout.activity_detail);
         Bundle extras = getIntent().getExtras();
+
+       MyListFragment.buttonType button_type_selected =(MyListFragment.buttonType) extras.get("buttonType");
+
         if(extras!=null){
+
             DetailFragment detailFragment=(DetailFragment) getSupportFragmentManager().findFragmentById(R.id.detailFragment);
 
-            if(MyListFragment.BUTTON_TYPE_SELECTED== MyListFragment.buttonType.Updater){
+            if(button_type_selected== MyListFragment.buttonType.Updater){
                 String url = extras.getString(EXTRA_URL);
                 detailFragment.setText(url);
 
             }
-            if(MyListFragment.BUTTON_TYPE_SELECTED== MyListFragment.buttonType.DisplayerBeach){
-                int img = extras.getInt(EXTRA_URL);
+            if(button_type_selected== MyListFragment.buttonType.DisplayerBeach){
+                String url = extras.getString(EXTRA_URL);
+                int img=Integer.parseInt(url);
+               // int img = extras.getInt(EXTRA_URL);
                 detailFragment.setImage(img);
 
             }

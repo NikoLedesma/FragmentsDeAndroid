@@ -16,11 +16,10 @@ import android.widget.Button;
 public class MyListFragment extends Fragment {
 
     private OnItemSelectedListener listener;
-    public static buttonType  BUTTON_TYPE_SELECTED =buttonType.Updater;
     public enum buttonType { Updater , DisplayerBeach }
 
     public interface  OnItemSelectedListener {
-        public void onRssItemSelected(String link);
+        public void onRssItemSelected(String link,buttonType tipodeboton);
     }
 
     @Override
@@ -33,13 +32,11 @@ public class MyListFragment extends Fragment {
 
 
     public void setOnClickListenerAllButtons(View view){
-
         Button buttonUpdater =(Button) view.findViewById(R.id.update_button);
         buttonUpdater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BUTTON_TYPE_SELECTED=buttonType.Updater;
-                updateDetail("fake");
+                updateDetail("fake",buttonType.Updater);
             }
         });
 
@@ -49,8 +46,7 @@ public class MyListFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        BUTTON_TYPE_SELECTED = buttonType.DisplayerBeach;
-                        updateDetail("beacher");
+                        updateDetail("beacher",buttonType.DisplayerBeach);
                     }
                 }
 
@@ -71,20 +67,18 @@ public class MyListFragment extends Fragment {
         }
     }
 
-    public void updateDetail(String uri){
+    public void updateDetail(String uri,buttonType tipodeboton){
         String newTime=null;
-
-        switch (BUTTON_TYPE_SELECTED){
+        switch (tipodeboton){
             case DisplayerBeach:
                 newTime = String.valueOf(111101111);
-                listener.onRssItemSelected(newTime);
+                listener.onRssItemSelected(newTime,tipodeboton);
             break;
 
             case Updater:
                 newTime = String.valueOf(System.currentTimeMillis());
-                listener.onRssItemSelected(newTime);
+                listener.onRssItemSelected(newTime,tipodeboton);
             break;
-
         }
 
 
