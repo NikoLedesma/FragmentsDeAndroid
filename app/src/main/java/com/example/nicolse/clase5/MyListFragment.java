@@ -36,7 +36,8 @@ public class MyListFragment extends Fragment {
         buttonUpdater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateDetail("fake",buttonType.Updater);
+               String uri= String.valueOf(System.currentTimeMillis());
+                updateDetail(uri,buttonType.Updater);
             }
         });
 
@@ -46,7 +47,8 @@ public class MyListFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        updateDetail("beacher",buttonType.DisplayerBeach);
+                        String uri=String.valueOf(R.drawable.beach);
+                        updateDetail(uri,buttonType.DisplayerBeach);
                     }
                 }
 
@@ -67,22 +69,11 @@ public class MyListFragment extends Fragment {
         }
     }
 
+
     public void updateDetail(String uri,buttonType tipodeboton){
-        String newTime=null;
-        switch (tipodeboton){
-            case DisplayerBeach:
-                newTime = String.valueOf(111101111);
-                listener.onRssItemSelected(newTime,tipodeboton);
-            break;
-
-            case Updater:
-                newTime = String.valueOf(System.currentTimeMillis());
-                listener.onRssItemSelected(newTime,tipodeboton);
-            break;
-        }
-
-
+                listener.onRssItemSelected(uri,tipodeboton);
     }
+
 
 }
 

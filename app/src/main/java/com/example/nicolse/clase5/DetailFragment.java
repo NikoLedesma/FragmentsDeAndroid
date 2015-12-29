@@ -27,6 +27,26 @@ public class DetailFragment extends Fragment{
         }
 
 
+
+
+
+
+    public void setComponent(String url , MyListFragment.buttonType button_type_selected){
+        if(button_type_selected== MyListFragment.buttonType.Updater){
+            setText(url);
+        }
+        if(button_type_selected== MyListFragment.buttonType.DisplayerBeach){
+            setImage(Integer.parseInt(url));
+        }
+    }
+
+
+
+
+
+
+
+
     public void setText(String url) {
         TextView view = null;
         view = (TextView) getView().findViewById(R.id.detailsText);

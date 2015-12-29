@@ -29,26 +29,15 @@ public class MainActivity extends FragmentActivity implements  MyListFragment.On
 
         boolean dual_pane=getResources().getBoolean(R.bool.dual_pane);
         if(dual_pane){
-            DetailFragment fragment = (DetailFragment) getSupportFragmentManager().findFragmentById(R.id.detailFragment);
-            if(tipodeboton == MyListFragment.buttonType.Updater){
-                fragment.setText(link);
-            }
-
-            if(tipodeboton == MyListFragment.buttonType.DisplayerBeach){
-                fragment.setImage(R.drawable.beach);
-            }
-
+            DetailFragment detailFragment = (DetailFragment) getSupportFragmentManager().findFragmentById(R.id.detailFragment);
+            detailFragment.setComponent(link,tipodeboton);
         }else{
             Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
             System.out.println("----------------------"+link+"-----------------------");
-            link=String.valueOf(R.drawable.beach);
             intent.putExtra(DetailActivity.EXTRA_URL,link);
             intent.putExtra("buttonType", tipodeboton);
             startActivity(intent);
         }
-
-
-
 
     }
 }

@@ -16,10 +16,6 @@ public class DetailActivity extends FragmentActivity {
 
     public static final String EXTRA_URL="url";
 
-
-
-
-
    @Override
     /*
 
@@ -33,9 +29,6 @@ public class DetailActivity extends FragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
-
         if(getResources().getBoolean(R.bool.dual_pane)){
             finish();
             return;
@@ -47,29 +40,10 @@ public class DetailActivity extends FragmentActivity {
        MyListFragment.buttonType button_type_selected =(MyListFragment.buttonType) extras.get("buttonType");
 
         if(extras!=null){
-
             DetailFragment detailFragment=(DetailFragment) getSupportFragmentManager().findFragmentById(R.id.detailFragment);
-
-            if(button_type_selected== MyListFragment.buttonType.Updater){
-                String url = extras.getString(EXTRA_URL);
-                detailFragment.setText(url);
-
-            }
-            if(button_type_selected== MyListFragment.buttonType.DisplayerBeach){
-                String url = extras.getString(EXTRA_URL);
-                int img=Integer.parseInt(url);
-               // int img = extras.getInt(EXTRA_URL);
-                detailFragment.setImage(img);
-
-            }
+            String url = extras.getString(EXTRA_URL);
+            detailFragment.setComponent(url,button_type_selected);
         }
-
     }
-
-
-
-
-
-
 
 }
